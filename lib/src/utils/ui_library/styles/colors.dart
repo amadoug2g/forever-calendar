@@ -9,5 +9,5 @@ const ColorScheme kColorScheme = ColorScheme.light(
   primary: primaryColor,
   secondary: secondaryColor,
   surface: surfaceColor,
-  error: errorColor
+  error: errorColor,
 );
