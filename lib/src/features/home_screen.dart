@@ -3,19 +3,19 @@ import 'package:forever_calendar/src/features/contact/presentation/contact_scree
 import 'package:forever_calendar/src/features/event/presentation/event_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({required this.isEventView, super.key});
+
+  final bool isEventView;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool isEventView = false;
-
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: isEventView ? const EventScreen() : const ContactScreen(),
+      child: widget.isEventView ? const EventScreen() : const ContactScreen(),
     );
   }
 }

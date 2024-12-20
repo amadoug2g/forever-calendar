@@ -5,11 +5,19 @@ class ContactScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        "Contact Screen",
-        style: Theme.of(context).textTheme.bodyLarge,
-      ),
+    return ListView.separated(
+      padding: const EdgeInsets.all(8),
+      itemCount: 40,
+      itemBuilder: (BuildContext context, int index) {
+        return Container(
+          height: 60,
+          color: Colors.blue,
+          child: const Center(
+            child: Text("Contact"),
+          ),
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) => const Divider(color: Colors.grey,),
     );
   }
 }

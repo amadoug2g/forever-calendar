@@ -8,7 +8,10 @@ class AppTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return RichText(
       text: TextSpan(
-        style: kTextTheme.displayLarge?.copyWith(fontWeight: FontWeight.w300),
+        style: kTextTheme.displayLarge?.copyWith(
+          fontWeight: FontWeight.w300,
+          fontSize: 20,
+        ),
         children: [
           const TextSpan(
             text: "The ",
