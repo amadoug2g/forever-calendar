@@ -13,7 +13,7 @@ class ForeverCalendarApp extends StatelessWidget {
       title: 'The Forever Calendar',
       theme: mainAppTheme,
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+      home: const SafeArea(child: HomeScreen()),
     );
   }
 }
