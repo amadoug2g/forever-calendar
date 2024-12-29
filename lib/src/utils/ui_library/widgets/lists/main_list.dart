@@ -3,65 +3,49 @@ import 'package:forever_calendar/src/features/contact/domain/contact.dart';
 import 'package:forever_calendar/src/features/event/domain/event.dart';
 import 'package:forever_calendar/src/utils/ui_library/widgets/texts/text.dart';
 
-class MainList extends StatelessWidget {
-  const MainList({
+class ContactList extends StatelessWidget {
+  const ContactList({
     required this.list,
     required this.sectionTitle,
+    required this.colorCard,
     super.key,
   });
 
-  final List<String> list;
+  final List<Contact> list;
   final String sectionTitle;
+  final Color colorCard;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(18),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SectionHeader(text: sectionTitle),
-          Expanded(
-            child: ListView.separated(
-              padding: const EdgeInsets.all(8),
-              itemCount: list.length,
-              itemBuilder: (BuildContext context, int index) {
-                return MainCard(
-                  list: list,
-                  index: index,
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) =>
-                  const Divider(
-                color: Colors.grey,
+    if (list.isEmpty) {
+      return const Center(child: Text("No contacts at the moment"));
+    } else {
+      return Padding(
+        padding: const EdgeInsets.all(18),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SectionHeader(text: sectionTitle),
+            Expanded(
+              child: ListView.separated(
+                padding: const EdgeInsets.all(8),
+                itemCount: list.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ContactCard(
+                    contactList: list,
+                    index: index,
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) =>
+                    const Divider(
+                  color: Colors.grey,
+                ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class MainCard extends StatelessWidget {
-  const MainCard({
-    required this.list,
-    required this.index,
-    super.key,
-  });
-
-  final List<String> list;
-  final int index;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 60,
-      color: Theme.of(context).colorScheme.surface,
-      child: Center(
-        child: Text(list[index]),
-      ),
-    );
+          ],
+        ),
+      );
+    }
   }
 }
 
@@ -88,6 +72,52 @@ class ContactCard extends StatelessWidget {
   }
 }
 
+class EventList extends StatelessWidget {
+  const EventList({
+    required this.list,
+    required this.sectionTitle,
+    required this.colorCard,
+    super.key,
+  });
+
+  final List<Event> list;
+  final String sectionTitle;
+  final Color colorCard;
+
+  @override
+  Widget build(BuildContext context) {
+    if (list.isEmpty) {
+      return const Center(child: Text("No events at the moment"));
+    } else {
+      return Padding(
+        padding: const EdgeInsets.all(18),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SectionHeader(text: sectionTitle),
+            Expanded(
+              child: ListView.separated(
+                padding: const EdgeInsets.all(8),
+                itemCount: list.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return EventCard(
+                    eventList: list,
+                    index: index,
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) =>
+                    const Divider(
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+}
+
 class EventCard extends StatelessWidget {
   const EventCard({
     required this.eventList,
@@ -108,35 +138,10 @@ class EventCard extends StatelessWidget {
         child: Column(
           children: [
             Text(event.title),
-            Text(event.eventDate as String),
+            Text(event.getFormattedEventDate()),
           ],
         ),
       ),
     );
-  }
-}
-
-class DynamicListScreen extends StatelessWidget {
-  const DynamicListScreen({
-    required this.list,
-    required this.sectionTitle,
-    required this.colorCard,
-    super.key,
-  });
-
-  final List<String> list;
-  final String sectionTitle;
-  final Color colorCard;
-
-  @override
-  Widget build(BuildContext context) {
-    if (list.isEmpty) {
-      return Center(child: Text("No $sectionTitle at the moment"));
-    } else {
-      return MainList(
-        list: list,
-        sectionTitle: "Upcoming $sectionTitle",
-      );
-    }
   }
 }

@@ -63,14 +63,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget pickView() {
     if (currentIndex == 0) {
-      return DynamicListScreen(
-        list: eventList,
+      return EventList(
+        list: events,
         sectionTitle: "Events",
         colorCard: surfaceColor,
       );
     } else {
-      return DynamicListScreen(
-        list: contactList,
+      return ContactList(
+        list: contacts,
         sectionTitle: "Contacts",
         colorCard: Colors.white,
       );

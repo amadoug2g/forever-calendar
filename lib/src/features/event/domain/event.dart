@@ -1,4 +1,5 @@
 import 'package:forever_calendar/src/features/contact/domain/note.dart';
+import 'package:intl/intl.dart';
 
 class Event {
   Event({
@@ -17,4 +18,9 @@ class Event {
   List<String> participantID;
   List<Tag> tags;
   DateTime createdTime;
+
+  String getFormattedEventDate() {
+    final DateFormat formatter = DateFormat('dd/MM/yyyy');
+    return formatter.format(eventDate);
+  }
 }
