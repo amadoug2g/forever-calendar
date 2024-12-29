@@ -5,15 +5,16 @@ class Event {
     required this.id,
     required this.title,
     required this.description,
-    required this.participantID,
-    required this.tags,
-    required this.createdTime,
-  });
+    required this.eventDate,
+    this.participantID = const [],
+    this.tags = const [],
+  }) : createdTime = DateTime.now();
 
-  String id;
-  String title;
-  String description;
-  List<String> participantID = const [];
-  List<Tag> tags = const [];
+  final String id;
+  final String title;
+  final String description;
+  DateTime eventDate;
+  List<String> participantID;
+  List<Tag> tags;
   DateTime createdTime;
 }

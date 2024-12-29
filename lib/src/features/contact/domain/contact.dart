@@ -5,20 +5,19 @@ class Contact {
     required this.id,
     required this.firstName,
     required this.lastName,
-    required this.notes,
-    required this.groups,
-    required this.createdTime,
-  });
+    this.notes = const [],
+    this.groups = const [],
+  }) : createdTime = DateTime.now();
 
-  String id;
-  String firstName;
-  String lastName;
-  List<Note> notes = const [];
-  List<Group> groups = const [];
-  DateTime createdTime;
+  final String id;
+  final String firstName;
+  final String lastName;
+  List<Note> notes;
+  List<Group> groups;
+  final DateTime createdTime;
 
   @override
-  String toString() => 'Contact: $firstName $lastName';
+  String toString() => '$firstName $lastName';
 }
 
 class Group {
@@ -28,7 +27,7 @@ class Group {
     required this.description,
   });
 
-  String id;
+  final String id;
   String name;
   String description;
 }

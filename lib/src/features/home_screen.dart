@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:forever_calendar/src/features/contact/domain/contact.dart';
+import 'package:forever_calendar/src/features/event/domain/event.dart';
 import 'package:forever_calendar/src/utils/ui_library/styles/colors.dart';
 import 'package:forever_calendar/src/utils/ui_library/widgets/lists/main_list.dart';
 import 'package:forever_calendar/src/utils/ui_library/widgets/texts/text.dart';
@@ -22,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
       label: "Contacts",
     ),
   ];
+
   List<String> eventList = [];
   List<String> contactList = [];
 
@@ -30,10 +33,33 @@ class _HomeScreenState extends State<HomeScreen> {
     1: "New Contact",
   };
 
-  final Map<int, VoidCallback> fabActions = {
-    0: () => debugPrint("from EVENT"),
-    1: () => debugPrint("from CONTACT"),
-  };
+  final List<Contact> contacts = [
+    Contact(
+      id: "C1",
+      firstName: "John",
+      lastName: "Doe",
+    ),
+    Contact(
+      id: "C2",
+      firstName: "Janet",
+      lastName: "Jackson",
+    ),
+  ];
+
+  final List<Event> events = [
+    Event(
+      id: "E1",
+      title: "Meeting",
+      description: "Nothing important :)",
+      eventDate: DateTime(2024, 12, 25),
+    ),
+    Event(
+      id: "E2",
+      title: "Birthday",
+      description: "Special day indeed",
+      eventDate: DateTime(1997, 3, 11),
+    ),
+  ];
 
   Widget pickView() {
     if (currentIndex == 0) {
@@ -53,6 +79,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Map<int, VoidCallback> fabActions = {
+      0: () => Navigator.pushNamed(context, '/newEvent'),
+      1: () => Navigator.pushNamed(context, '/newContact'),
+    };
+
     return Scaffold(
       body: Column(
         children: [

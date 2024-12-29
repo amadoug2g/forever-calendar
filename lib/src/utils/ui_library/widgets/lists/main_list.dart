@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:forever_calendar/src/features/contact/domain/contact.dart';
+import 'package:forever_calendar/src/features/event/domain/event.dart';
 import 'package:forever_calendar/src/utils/ui_library/widgets/texts/text.dart';
 
 class MainList extends StatelessWidget {
@@ -58,6 +60,57 @@ class MainCard extends StatelessWidget {
       color: Theme.of(context).colorScheme.surface,
       child: Center(
         child: Text(list[index]),
+      ),
+    );
+  }
+}
+
+class ContactCard extends StatelessWidget {
+  const ContactCard({
+    required this.contactList,
+    required this.index,
+    super.key,
+  });
+
+  final List<Contact> contactList;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    final contact = contactList[index];
+    return Container(
+      height: 60,
+      color: Theme.of(context).colorScheme.surface,
+      child: Center(
+        child: Text("$contact"),
+      ),
+    );
+  }
+}
+
+class EventCard extends StatelessWidget {
+  const EventCard({
+    required this.eventList,
+    required this.index,
+    super.key,
+  });
+
+  final List<Event> eventList;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    final event = eventList[index];
+    return Container(
+      height: 60,
+      color: Theme.of(context).colorScheme.surface,
+      child: Center(
+        child: Column(
+          children: [
+            Text(event.title),
+            Text(event.eventDate as String),
+          ],
+        ),
       ),
     );
   }
