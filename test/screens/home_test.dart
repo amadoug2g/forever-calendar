@@ -4,6 +4,8 @@ import 'package:forever_calendar/src/features/contact/domain/contact.dart';
 import 'package:forever_calendar/src/features/event/domain/event.dart';
 import 'package:forever_calendar/src/features/home_screen.dart';
 import 'package:forever_calendar/src/utils/ui_library/widgets/lists/contact_list.dart';
+import 'package:forever_calendar/src/utils/ui_library/widgets/lists/event_list.dart';
+import 'package:forever_calendar/src/utils/ui_library/widgets/texts/text.dart';
 
 void main() {
   final List<Contact> contacts = [
@@ -49,8 +51,9 @@ void main() {
     testWidgets('Tapping Contacts tab shows Contact view', (WidgetTester tester) async {
       await tester.pumpWidget(const MaterialApp(home: emptyHomeScreen));
       await tester.tap(find.text("Contacts"));
-      expect(find.byType(FloatingActionButton), findsOneWidget);
-      expect(find.text("Contacts"), findsOneWidget);
+      await tester.pumpAndSettle();
+      expect(find.byType(ContactList), findsOneWidget);
+      expect(find.text("No contacts at the moment"), findsOneWidget);
     });
   });
 
@@ -59,17 +62,42 @@ void main() {
       await tester.pumpWidget(const MaterialApp(home: emptyHomeScreen));
       expect(find.text("No events at the moment"), findsOneWidget);
     });
-    test('Populated event list returned successfully', () {});
-    test('Added event shows in event list', () {});
-    test('Deleted event does not show in event list', () {});
-    test('Updated event changes in event list', () {});
+    testWidgets('Populated event list returned successfully', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(home: populatedHomeScreen));
+      expect(find.widgetWithText(EventCard, "Meeting"), findsOneWidget);
+      expect(find.widgetWithText(EventCard, "Birthday"), findsOneWidget);
+      expect(find.text("No events at the moment"), findsNothing);
+    });
+    testWidgets('Added event shows in event list', (WidgetTester tester) async {
+      // TODO: feature to be implemented
+    });
+    testWidgets('Deleted event does not show in event list', (WidgetTester tester) async {
+      // TODO: feature to be implemented
+    });
+    testWidgets('Updated event changes in event list', (WidgetTester tester) async {
+      // TODO: feature to be implemented
+    });
   });
 
   group('Contact', () {
-    test('No contacts shows empty status message', () {});
-    test('Populated contact list returned successfully', () {});
-    test('Added contact shows in contact list', () {});
-    test('Deleted contact does not show in contact list', () {});
-    test('Updated contact changes in contact list', () {});
+    testWidgets('Populated contact list returned successfully', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(home: populatedHomeScreen));
+      await tester.tap(find.text("Contacts"));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(ContactList), findsOneWidget);
+      expect(find.text("John Doe"), findsOneWidget);
+      expect(find.text("Janet Jackson"), findsOneWidget);
+      expect(find.text("No contacts at the moment"), findsNothing);
+    });
+    testWidgets('Added contact shows in contact list', (WidgetTester tester) async {
+      // TODO: feature to be implemented
+    });
+    testWidgets('Deleted contact does not show in contact list', (WidgetTester tester) async {
+      // TODO: feature to be implemented
+    });
+    testWidgets('Updated contact changes in contact list', (WidgetTester tester) async {
+      // TODO: feature to be implemented
+    });
   });
 }
